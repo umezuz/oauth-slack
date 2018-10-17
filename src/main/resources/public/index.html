@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSO Sample</title>
+  </head>
+  <body>
+    <p>SSO Sample <a href="/login">login</a></p>
+    <form id="logoutForm" action="/logout" method="POST">
+      <input type="submit" value="logout" />
+    </form>
+    <p id="message"></p>
+    <br>
+    <div>
+    <p><a href="/api/ume">Kick ApiUme</a></p>
+    </div>
+  </body>
+  <script src="//code.jquery.com/jquery-2.2.0.js"></script>
+  <script>
+    $.get('/healthcheck').done(function(data){
+      $("#message").html(data.message);
+    }).fail(function(data){
+      $("#message").html(data.responseJSON.message);
+    });
+  </script>
+</html>

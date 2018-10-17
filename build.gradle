@@ -1,0 +1,53 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.5.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+war {
+	archiveName 'web.war'
+}
+
+group = 'com.example'
+version = ''
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-security')
+//    compile('org.springframework.security.oauth:spring-security-oauth2')
+    compile('org.springframework.security:spring-security-oauth2-core')
+    compile("org.springframework.boot:spring-boot-devtools") //コード更新時にアプリケーションをリロードする
+    compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.0.5.RELEASE'
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//    compile group: 'javax.el', name: 'el-api', version: '2.2'
+//    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.2.0.Final'
+//    compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+    compile('org.hibernate:hibernate-validator:5.2.4.Final')
+}
+
+
+bootRun {
+    jvmArgs = ['-Dspring.output.ansi.enabled=always'] //コンソールに色を付ける
+}
+
